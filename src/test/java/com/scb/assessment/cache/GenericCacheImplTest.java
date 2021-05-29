@@ -10,19 +10,19 @@ public class GenericCacheImplTest {
 
     @Test(expected = NullPointerException.class)
     public void testGetNPEWhenFunctionIsNull() {
-        GenericCacheImpl<String, String> cache = new GenericCacheImpl<>(null, 2);
+        Cache<String, String> cache = new GenericCacheImpl<>(null, 2);
         cache.get("");
     }
 
     @Test(expected = NullPointerException.class)
     public void testGetNPEWhenCacheIsNull() {
-        GenericCacheImpl<String, String> cache = new GenericCacheImpl<>(String::toString, null);
+        Cache<String, String> cache = new GenericCacheImpl<>(String::toString, null);
         cache.get("");
     }
 
     @Test(expected = NullPointerException.class)
     public void testGetNPEWhenKeyIsNull() {
-        GenericCacheImpl<String, String> cache = new GenericCacheImpl<>(String::toString, 2);
+        Cache<String, String> cache = new GenericCacheImpl<>(String::toString, 2);
         cache.get(null);
     }
 
@@ -30,7 +30,7 @@ public class GenericCacheImplTest {
     public void testGetNPEWhenValueIsNull() {
         Function<String, String> mock = mock(Function.class);
         when(mock.apply(any(String.class))).thenReturn(any(String.class));
-        GenericCacheImpl<String, String> cache = new GenericCacheImpl<>(mock, 2);
+        Cache<String, String> cache = new GenericCacheImpl<>(mock, 2);
         cache.get("test");
     }
 
@@ -38,7 +38,7 @@ public class GenericCacheImplTest {
     public void testGet() {
         Function<String, String> mock = mock(Function.class);
         when(mock.apply(any(String.class))).thenReturn("TEST");
-        GenericCacheImpl<String, String> cache = new GenericCacheImpl<>(mock, 2);
+        Cache<String, String> cache = new GenericCacheImpl<>(mock, 2);
 
         cache.get("test");
         cache.get("test1");
